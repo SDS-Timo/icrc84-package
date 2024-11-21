@@ -49,6 +49,7 @@ const useTokens = <T extends Record<string, (...args: any[]) => any>>(
           return {
             ...token,
             fee,
+            feeNat: token.fee,
             logo,
             principal: principal.toText(),
           }
@@ -84,6 +85,7 @@ const useTokens = <T extends Record<string, (...args: any[]) => any>>(
       return {
         ...token,
         fee,
+        feeNat: token.fee.toString(),
         logo,
         principal: quotePrincipal.toText(),
       }
