@@ -1,8 +1,19 @@
 const url = require('@rollup/plugin-url')
 const svgo = require('rollup-plugin-svgo')
+const replace = require('@rollup/plugin-replace')
 
 module.exports = {
   rollup(config, options) {
+    config.plugins = config.plugins.map(plugin => {
+      if (plugin.name === 'replace') {
+        return replace({
+          ...plugin.options,
+          preventAssignment: true,
+        })
+      }
+      return plugin
+    })
+
     config.plugins = [
       ...config.plugins,
       url({
@@ -13,6 +24,7 @@ module.exports = {
       }),
       svgo(),
     ]
+
     return config
   },
 }
