@@ -1,103 +1,143 @@
-# TSDX User Guide
+# ICRC84 Package
 
-Congrats! You just saved yourself hours of work by bootstrapping this project with TSDX. Let’s get you oriented with what’s here and how to use it.
+[![npm version](https://img.shields.io/npm/v/icrc84-package.svg)](https://www.npmjs.com/package/icrc84-package)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-> This TSDX setup is meant for developing libraries (not apps!) that can be published to NPM. If you’re looking to build a Node app, you could use `ts-node-dev`, plain `ts-node`, or simple `tsc`.
+A TypeScript library for interacting with ICRC-84 tokens on the Internet Computer (IC) blockchain ecosystem.
 
-> If you’re new to TypeScript, checkout [this handy cheatsheet](https://devhints.io/typescript)
+## Overview
 
-## Commands
+The ICRC84 package provides a set of hooks and utilities for seamless integration with ICRC-84 standard tokens on the Internet Computer Protocol. This library simplifies wallet connectivity, token operations, and transaction handling for decentralized applications built on ICP.
 
-TSDX scaffolds your new library inside `/src`.
+## Features
 
-To run TSDX, use:
+- 🔌 **Wallet Integration** - Easy connection to Internet Computer wallets
+- 💰 **Token Management** - Comprehensive token data handling and operations
+- 🔄 **Transaction Support** - Simplified transaction creation and submission
+- 🛠️ **TypeScript Support** - Full TypeScript definitions for type safety
+- 🧩 **Modular Design** - Composable hooks for flexible implementation
+
+## Installation
 
 ```bash
-npm start # or yarn start
+# Using npm
+npm install icrc84-package
+
+# Using yarn
+yarn add icrc84-package
 ```
 
-This builds to `/dist` and runs the project in watch mode so any edits you save inside `src` causes a rebuild to `/dist`.
+## Requirements
 
-To do a one-off build, use `npm run build` or `yarn build`.
+This package has the following peer dependencies:
 
-To run tests, use `npm test` or `yarn test`.
+- `@dfinity/agent`: ^2.1.3
+- `@dfinity/ledger-icrc`: ^2.6.3
+- `@dfinity/principal`: ^2.1.3
 
-## Configuration
+## Quick Start
 
-Code quality is set up for you with `prettier`, `husky`, and `lint-staged`. Adjust the respective fields in `package.json` accordingly.
+```typescript
+import { useWallet, useTokens } from 'icrc84-package'
+import { idlFactory } from './icrc1_auction.did'
 
-### Jest
+// Canister ID
+const canisterId = `Your canister ID`
 
-Jest tests are set up to run with `npm test` or `yarn test`.
+// User Agent
+const userAgent = `Your user Agent`
 
-### Bundle Analysis
+// Access balance information
+const { getBalance } = useWallet(userAgent, canisterId, idlFactory)
 
-[`size-limit`](https://github.com/ai/size-limit) is set up to calculate the real cost of your library with `npm run size` and visualize the bundle with `npm run analyze`.
+// Example: get balance
+const balance = await getBalance(
+  [token],
+  `${token.principal}`,
+  userPrincipal,
+  'claim',
+)
 
-#### Setup Files
+// Access token information
+const { getTokens } = useTokens(userAgent, canisterId, idlFactory)
 
-This is the folder structure we set up for you:
-
-```txt
-/src
-  index.tsx       # EDIT THIS
-/test
-  blah.test.tsx   # EDIT THIS
-.gitignore
-package.json
-README.md         # EDIT THIS
-tsconfig.json
+// Example: get tokens
+const { tokens } = await getTokens()
 ```
 
-### Rollup
+## Using Types
 
-TSDX uses [Rollup](https://rollupjs.org) as a bundler and generates multiple rollup configs for various module formats and build settings. See [Optimizations](#optimizations) for details.
+The library exports TypeScript types that you can import in your project:
 
-### TypeScript
+```typescript
+import { TokenMetadata, TokenDataItem, Result } from 'icrc84-package'
 
-`tsconfig.json` is set up to interpret `dom` and `esnext` types, as well as `react` for `jsx`. Adjust according to your needs.
+// Example: Define a typed variable
+const myToken: TokenMetadata = {
+  symbol: 'ICP',
+  name: 'Internet Computer Protocol',
+  decimals: 8,
+  logo: 'icp-logo.svg',
+  fee: 0.0001,
+  feeNat: '10000',
+  quote: 'USD',
+  base: 'ICP',
+}
 
-## Continuous Integration
-
-### GitHub Actions
-
-Two actions are added by default:
-
-- `main` which installs deps w/ cache, lints, tests, and builds on all pushes against a Node and OS matrix
-- `size` which comments cost comparison of your library on every pull request using [`size-limit`](https://github.com/ai/size-limit)
-
-## Optimizations
-
-Please see the main `tsdx` [optimizations docs](https://github.com/palmerhq/tsdx#optimizations). In particular, know that you can take advantage of development-only optimizations:
-
-```js
-// ./types/index.d.ts
-declare var __DEV__: boolean;
-
-// inside your code...
-if (__DEV__) {
-  console.log('foo');
+// Example: Type a function parameter
+function processToken(token: TokenMetadata) {
+  // Process token information
 }
 ```
 
-You can also choose to install and use [invariant](https://github.com/palmerhq/tsdx#invariant) and [warning](https://github.com/palmerhq/tsdx#warning) functions.
+## API Reference
 
-## Module Formats
+### `useWallet(userAgent, canisterId, idlFactory)`
 
-CJS, ESModules, and UMD module formats are supported.
+Hook for wallet operations and balance management.
 
-The appropriate paths are configured in `package.json` and `dist/index.js` accordingly. Please report if any issues are found.
+**Parameters:**
 
-## Named Exports
+- `userAgent`: The HTTP agent for interacting with the Internet Computer
+- `canisterId`: The canister ID
+- `idlFactory`: The IDL factory for canister interaction
 
-Per Palmer Group guidelines, [always use named exports.](https://github.com/palmerhq/typescript#exports) Code split inside your React app instead of your React library.
+**Returns:**
 
-## Including Styles
+- `getBalance(tokens, principal, account, action)`: Function to get account balance
+- `getTrackedDeposit(tokens, principal)`: Function to get tracked deposits
+- `balanceNotify(principal)`: Function to notify balance updates
+- `withdrawCredit(principal, account, amount)`: Function to withdraw credit
+- `getDepositAllowanceInfo(principal, account)`: Function to get deposit allowance info
+- `deposit(principal, account, amount)`: Function to deposit credit
 
-There are many ways to ship styles, including with CSS-in-JS. TSDX has no opinion on this, configure how you like.
+### `useTokens(userAgent, canisterId, idlFactory)`
 
-For vanilla CSS, you can include it at the root directory and add it to the `files` section in your `package.json`, so that it can be imported separately by your users and run through their bundler's loader.
+Hook for token operations and management.
 
-## Publishing to NPM
+**Parameters:**
 
-We recommend using [np](https://github.com/sindresorhus/np).
+- `userAgent`: The HTTP agent for interacting with the Internet Computer
+- `canisterId`: The canister ID
+- `idlFactory`: The IDL factory for canister interaction
+
+**Returns:**
+
+- `getTokens()`: Function to get all supported tokens
+- `getQuoteToken()`: Function to get the quote token
+
+## Security
+
+This package follows best practices for secure interactions with the Internet Computer protocol. However, always audit your integration and ensure proper security measures in your application.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## Support
+
+If you encounter any issues or have questions about this package, please file an issue on the [GitHub repository](https://github.com/SDS-Timo/icrc84-package/issues).
