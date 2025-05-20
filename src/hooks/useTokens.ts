@@ -7,6 +7,7 @@ import { getActor } from '../utils/canisterUtils'
 
 /**
  * Custom hook for fetching and managing tokens.
+ * @param userAgent - The HTTP agent for interacting with the Internet Computer.
  * @param idlFactory - The IDL factory for the specific canister.
  * @param canisterId - The principal ID of the canister.
  */

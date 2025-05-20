@@ -16,6 +16,7 @@ import { getToken } from '../utils/tokenUtils'
 
 /**
  * Custom hook for fetching and managing user wallet.
+ * @param userAgent - The HTTP agent for interacting with the Internet Computer.
  * @param idlFactory - The IDL factory for the specific canister.
  * @param canisterId - The principal ID of the canister.
  */
