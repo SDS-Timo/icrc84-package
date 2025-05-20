@@ -3,7 +3,7 @@
 [![npm version](https://img.shields.io/npm/v/icrc84-package.svg)](https://www.npmjs.com/package/icrc84-package)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-A TypeScript library for interacting with ICRC-84 tokens on the Internet Computer (IC) blockchain ecosystem.
+A TypeScript library for interacting with ICRC-84 tokens management and wallet operations on the Internet Computer (IC) blockchain ecosystem.
 
 ## Overview
 

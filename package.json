@@ -1,7 +1,7 @@
 {
   "name": "icrc84-package",
   "version": "1.0.0",
-  "description": "Lightweight JavaScript library for ICRC-84 token management and wallet operations on Internet Computer Protocol.",
+  "description": "Lightweight TypeScript library for ICRC-84 token management and wallet operations on Internet Computer Protocol.",
   "author": "HPL",
   "license": "MIT",
   "private": false,
