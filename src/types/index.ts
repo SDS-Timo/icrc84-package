@@ -35,3 +35,8 @@ export interface TokenMetadata {
 export interface TokenDataItem extends DataItem, TokenMetadata {
   [key: string]: any
 }
+export interface Result {
+  Ok?: any
+  Err?: any
+  [key: string]: any
+}
