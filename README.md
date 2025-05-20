@@ -7,13 +7,14 @@ A TypeScript library for interacting with ICRC-84 tokens management and wallet o
 
 ## Overview
 
-The ICRC84 package provides a set of hooks and utilities for seamless integration with ICRC-84 standard tokens on the Internet Computer Protocol. This library simplifies wallet connectivity, token operations, and transaction handling for decentralized applications built on ICP.
+The ICRC84 package provides a set of hooks and utilities for seamless integration with ICRC-84 standard tokens on the Internet Computer Protocol. This library offers wallet connectivity through the useWallet hook for balance checking, deposits, withdrawals, and allowance management, along with the useTokens hook for accessing token information and metadata. Built with TypeScript support, it enables developers to easily implement token operations in decentralized applications built on ICP.
 
 ## Features
 
-- 🔌 **Wallet Integration** - Easy connection to Internet Computer wallets
-- 💰 **Token Management** - Comprehensive token data handling and operations
-- 🔄 **Transaction Support** - Simplified transaction creation and submission
+- 🔌 **Wallet Operations** - Hooks for managing Internet Computer wallet balances and transactions
+- 💰 **Balance Management** - Functions for checking and managing token balances
+- 💳 **Deposit Operations** - Support for deposits, withdrawals and allowances
+- 🪙 **Token Data Access** - Utilities to fetch token information and metadata
 - 🛠️ **TypeScript Support** - Full TypeScript definitions for type safety
 - 🧩 **Modular Design** - Composable hooks for flexible implementation
 
